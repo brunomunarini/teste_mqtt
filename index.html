@@ -90,6 +90,7 @@
         }
 
         /* Direcionais */
+
         .botoes {
             display: flex;
             flex-direction: column;
@@ -110,7 +111,6 @@
 
         button {
             border: none;
-            border-radius: 50%;
             background-color: white;
             box-shadow: 0 0 4px black;
             transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.1s ease;
@@ -118,9 +118,6 @@
             align-items: center;
             justify-content: center;
             font-family: sans-serif;
-            font-size: 9vw;
-            width: 18vw;
-            height: 18vw;
             padding: 0;
             line-height: 1;
             text-align: center;
@@ -131,34 +128,14 @@
             transform: scale(0.95);
         }
 
-        /* Direcionais */
-        .up-button,
-        .down-button,
-        .left-button,
-        .right-button {
-            font-size: calc(100vw / 15);
-            width: calc(100vw / 6);
-            height: calc(100vw / 6);
+        .circular-button {
+            border-radius: 50%;
+            width: 18vw;
+            height: 18vw;
+            font-size: 9vw;
         }
 
-        /* OK */
-        .ok-button {
-            font-size: calc(100vw / 15);
-            font-weight: bold;
-            width: calc(100vw / 6);
-            height: calc(100vw / 6);
-        }
-
-        /* Cancelar */
-        .cancel-button {
-            font-size: calc(100vw / 20);
-            font-weight: bold;
-            width: calc(100vw / 3);
-            height: calc(100vw / 9);
-            border-radius: calc(100vw / 24);
-        }
-
-        /* Alternar */
+        .cancel-button,
         .alt-button {
             font-size: calc(100vw / 20);
             font-weight: bold;
@@ -177,6 +154,11 @@
         .navegacao .meio {
             display: flex;
             gap: calc(100vw / 30);
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
         }
     </style>
 
@@ -201,15 +183,24 @@
         </div>
 
         <div class="navegacao">
-            <button class="up-button" onclick="enviarComando('CIMA')">▲</button>
+            <button class="up-button circular-button" onclick="enviarComando('CIMA')">
+                 <svg viewBox="0 0 24 24"><polygon points="15,6 9,12 15,18" fill="black" transform="rotate(90 12 12)"/></svg>
+            </button>
             <div class="meio">
-                <button class="left-button" onclick="enviarComando('ESQUERDA')">◄</button>
-                <button class="ok-button" onclick="enviarComando('OK')">OK</button>
-                <button class="right-button" onclick="enviarComando('DIREITA')">►</button>
+                <button class="left-button circular-button" onclick="enviarComando('ESQUERDA')">
+                    <svg viewBox="0 0 24 24"><polygon points="15,6 9,12 15,18" fill="black"/></svg>
+                </button>
+                <button class="ok-button circular-button" onclick="enviarComando('OK')">OK</button>
+                <button class="right-button circular-button" onclick="enviarComando('DIREITA')">
+                    <svg viewBox="0 0 24 24"><polygon points="15,6 9,12 15,18" fill="black" transform="rotate(180 12 12)"/></svg>
+                </button>
             </div>
-            <button class="down-button" onclick="enviarComando('BAIXO')">▼</button>
+            <button class="down-button circular-button" onclick="enviarComando('BAIXO')">
+                <svg viewBox="0 0 24 24"><polygon points="15,6 9,12 15,18" fill="black" transform="rotate(-90 12 12)"/></svg>
+            </button>
         </div>
     </div>
+
 
     <script>
         /*Conexão com MQTT*/
