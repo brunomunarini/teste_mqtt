@@ -231,10 +231,25 @@
             client.subscribe('linha/#'); ///Faz subsctrição no linha
         });
 
+        client.on('error', function (error) {
+            console.error('Erro na conexão MQTT:', error);
+        });
+
         client.on('message', function (topic, message) {
             const text = message.toString();
 
-            if (topic === 'linha/1') {
+            if (topic == 'linha/todas') {
+                const linhas = text.split('\n');
+                if (linhas.length >= 4) {
+                    document.getElementById('linha1').textContent = linhas[0];
+                    document.getElementById('linha2').textContent = linhas[1];
+                    document.getElementById('linha3').textContent = linhas[2];
+                    document.getElementById('linha4').textContent = linhas[3];
+                } else {
+                    console.warn('Dados recebidos em linha/todas incompletos:', linhas);
+                }
+            }
+            else if (topic === 'linha/1') {
                 document.getElementById('linha1').textContent = text;
             }
             else if (topic === 'linha/2') {
@@ -248,11 +263,28 @@
             }
         });
 
-        // Função para enviar comandos MQTT
         function enviarComando(comando) {
-            client.publish('comando/botao', comando);
-            console.log('Comando enviado:', comando);
+            let byte = 0;
+
+            switch (comando) {
+                case 'CIMA': byte = 0b00000001; break;
+                case 'ESQUERDA': byte = 0b00000010; break;
+                case 'ALTERNA': byte = 0b00000100; break;
+                case 'DIREITA': byte = 0b00001000; break;
+                case 'CANCELA': byte = 0b00010000; break;
+                case 'BAIXO': byte = 0b00100000; break;
+                case 'OK': byte = 0b01000000; break;
+            }
+
+            const buffer = new Uint8Array([byte]);
+            //client.publish('comando/botao', buffer);//Envia numero
+            client.publish('comando/botao', byte.toString());//Envia string pra teste
+            console.log('Comando enviado (byte):', byte.toString(2).padStart(8, '0'));
         }
+
+        window.addEventListener('beforeunload', () => {
+            client.end();
+        });
     </script>
 </body>
 
