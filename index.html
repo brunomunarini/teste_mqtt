@@ -90,7 +90,6 @@
         }
 
         /* Direcionais */
-
         .botoes {
             display: flex;
             flex-direction: column;
@@ -133,6 +132,18 @@
             width: 18vw;
             height: 18vw;
             font-size: 9vw;
+        }
+
+        /* Direcionais */
+        .ok-button,
+        .up-button,
+        .down-button,
+        .left-button,
+        .right-button {
+            font-weight: bold;
+            font-size: calc(100vw / 15);
+            width: calc(100vw / 6);
+            height: calc(100vw / 6);
         }
 
         .cancel-button,
@@ -184,23 +195,31 @@
 
         <div class="navegacao">
             <button class="up-button circular-button" onclick="enviarComando('CIMA')">
-                 <svg viewBox="0 0 24 24"><polygon points="15,6 9,12 15,18" fill="black" transform="rotate(90 12 12)"/></svg>
+
+                <svg viewBox="0 0 24 24">
+                    <polygon points="15,6 9,12 15,18" fill="black" transform="rotate(90 12 12)" />
+                </svg>
             </button>
             <div class="meio">
                 <button class="left-button circular-button" onclick="enviarComando('ESQUERDA')">
-                    <svg viewBox="0 0 24 24"><polygon points="15,6 9,12 15,18" fill="black"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <polygon points="15,6 9,12 15,18" fill="black" />
+                    </svg>
                 </button>
                 <button class="ok-button circular-button" onclick="enviarComando('OK')">OK</button>
                 <button class="right-button circular-button" onclick="enviarComando('DIREITA')">
-                    <svg viewBox="0 0 24 24"><polygon points="15,6 9,12 15,18" fill="black" transform="rotate(180 12 12)"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <polygon points="15,6 9,12 15,18" fill="black" transform="rotate(180 12 12)" />
+                    </svg>
                 </button>
             </div>
             <button class="down-button circular-button" onclick="enviarComando('BAIXO')">
-                <svg viewBox="0 0 24 24"><polygon points="15,6 9,12 15,18" fill="black" transform="rotate(-90 12 12)"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <polygon points="15,6 9,12 15,18" fill="black" transform="rotate(-90 12 12)" />
+                </svg>
             </button>
         </div>
     </div>
-
 
     <script>
         /*Conexão com MQTT*/
